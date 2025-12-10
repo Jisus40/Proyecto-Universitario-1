@@ -5,7 +5,7 @@ using namespace std;
 int cantidadDeCaracteres;
 char caracterIngresado;
 
- bool esPrimo (int c){
+ /*bool esPrimo (int c){
 	        if (c==2){
 	            return true;
 	        }
@@ -20,9 +20,26 @@ char caracterIngresado;
 	            }
 	        }
 	           
- }; 
+ };*/ 
  
- 
+ void esPrimo(int numero){
+ 	int contador = 0;
+ 	for (int i = 2; i < numero; i++)
+ 	{
+ 		if (numero % i == 0)
+ 		{
+ 			contador++;
+ 		} else {
+ 			contador += 0;
+ 		}
+ 	}
+ 	if (contador > 0)
+ 	{
+ 		cout << "no es primo" << endl;
+ 	} else {
+ 		cout << "es primo" << endl;
+ 	}
+ }
 
 int main() {
 	cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
@@ -33,8 +50,9 @@ int main() {
 	    cin >> caracterIngresado;
 	    int caracterConvertido = caracterIngresado;
 	    cout << caracterConvertido << endl;
-	   cout<<esPrimo(caracterConvertido)<<endl;
-	} 
-	
+	    esPrimo(caracterConvertido);
+	    } 
+	    //cout<<esPrimo(caracterConvertido)<<endl;
+	system("pause");
 	return 0;
 }

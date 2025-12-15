@@ -67,8 +67,26 @@ char caracterIngresado;
  	}
  }
 
+ int convertirABinario(int numero) {
+ 	int cociente = numero;
+ 	double binario = 0.0000001;
+ 	float contador = 1000000;
+
+ 	while(cociente > 0) {
+ 		if (cociente % 2 == 1)
+ 		{
+ 			binario += (1 / contador);
+ 		}
+ 		cout << binario << endl;
+ 		cociente /= 2;
+ 		contador /= 10;
+
+ 	}
+ 	return binario;
+ }
+
 int main() {
-	cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
+	/*cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
 	cin >> cantidadDeCaracteres;
 	
 	for (int i = 1; i <= cantidadDeCaracteres; i++) {
@@ -101,8 +119,17 @@ int main() {
 	    	digitoFinalFase1 = d1 + d2 + d3;
 	    	cout << "digito final de la fase 1: " << digitoFinalFase1 << endl;
 	    }
-	    } 
-	    //cout<<esPrimo(caracterConvertido)<<endl;
+	    }*/
+
+	    //fase 3:
+	    int fase2;
+	    //char caracterFinal = codificacion(fase2);
+	    char caracterFinal;
+	    cin >> caracterFinal;
+	    int caracterFinalConvertido = caracterFinal;
+	    cout << caracterFinalConvertido << endl;
+	    //int binarioFase2 = convertirABinario(fase2);
+	    int binarioCaracterFinalConvertido = convertirABinario(caracterFinalConvertido);
 	system("pause");
 	return 0;
 }

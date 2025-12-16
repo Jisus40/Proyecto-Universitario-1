@@ -67,69 +67,167 @@ char caracterIngresado;
  	}
  }
 
- int convertirABinario(int numero) {
- 	int cociente = numero;
- 	double binario = 0.0000001;
- 	float contador = 1000000;
+ int plegadoFase1(int numero) {
+ 	int d1, d2, d3;
+	int digitoFinal;
+	    if (numero < 100)
+	    {
+	    	d1 = numero / 10;
+	    	d2 = numero % 10;
+	    	cout << "primer digito: " << d1 << endl;
+	    	cout << "segundo digito: " << d2 << endl;
+	    	digitoFinal = d1 + d2;
+	    	cout << digitoFinal << endl;
+	    } else {
+	    	d1 = numero / 100;
+	    	d2 = (numero % 100) / 10;
+	    	d3 = numero % 10;
+	    	cout << "primer digito: " << d1 << endl;
+	    	cout << "segundo digito: " << d2 << endl;
+	    	cout << "tercer digito: " << d3 << endl;
+	    	digitoFinal = d1 + d2 + d3;
+	    	cout << digitoFinal << endl;
+	    }
 
- 	while(cociente > 0) {
- 		if (cociente % 2 == 1)
- 		{
- 			binario += (1 / contador);
- 		}
- 		cout << binario << endl;
- 		cociente /= 2;
- 		contador /= 10;
+	    if (digitoFinal > 9)
+	    {
+	    	d1 = digitoFinal / 10;
+	    	d2 = digitoFinal % 10;
+	    	digitoFinal = d1 + d2;
+	    	cout << "digito final de la fase 1 es: " << digitoFinal << endl;
+	    } else {
+	    	cout << "digito final de la fase 1 es: " << digitoFinal << endl;
+	    }
+	    return digitoFinal;
+ }
+ 
+ char codificar(int numero) {
+ 	int caracter;
+     if (numero < 0 || numero > 9)
+     {
+     	cout << "no es un numero valido" << endl;
+    
+     } else {
+     	cout << "es un numero valido" << endl;
+    
+    }
+     if (numero == 0) { 
+       caracter = '$';
+       cout << "segun la tabla de silva, este numero es: " << '$' << endl;
+       
+    } else if (numero == 1) { 
+       caracter = '{';
+       cout << "segun la tabla de silva, este numero es: " << '{' << endl;
+    
+    } else if (numero == 2) { 
+       caracter = '~';
+       cout << "segun la tabla de silva, este numero es: " << '~' << endl;
+    
+    } else if (numero == 3) { 
+       caracter = '}';
+       cout << "segun la tabla de silva, este numero es: " << '}' << endl;
+    
+    } else if (numero == 4) { 
+       caracter = '%';
+       cout << "segun la tabla de silva, este numero es: " << '%' << endl;
+    
+    } else if (numero == 5) { 
+       caracter = 'd';
+       cout << "segun la tabla de silva, este numero es: " << 'd' << endl;
+    
+    } else if (numero == 6) { 
+       caracter = '&';
+       cout << "segun la tabla de silva, este numero es: " << '&' << endl;
+    
+    } else if (numero == 7) { 
+       caracter = 'o';
+       cout << "segun la tabla de silva, este numero es: " << 'o' << endl;
+    
+    } else if (numero == 8) { 
+       caracter = '@';
+       cout << "segun la tabla de silva, este numero es: " << '@' << endl;
+    
+    } else if (numero == 9) { 
+       caracter = 'j';
+       cout << "segun la tabla de silva, este numero es: " << 'j' << endl;
+    }
 
- 	}
- 	return binario;
+    return caracter; 
+ }
+
+ int plegadoFase2(int numero) {
+
+ 	int d1, d2, d3, d4;
+
+	 d1 = numero / 1000;
+	 
+	 d2 = (numero / 100) % 10;
+	 
+	 d3 = ((numero / 10) % 10) % 10;
+	 
+	 d4 = numero % 10;
+ 
+	cout << d1 << d2 << d3 << d4 << endl;
+
+    int sumaDedigitos = d1 + d2 + d3 + d4;
+
+	cout << sumaDedigitos << endl;
+
+	if (sumaDedigitos > 9)
+	{
+		d1 = sumaDedigitos / 10;
+		d2 = sumaDedigitos % 10;
+		sumaDedigitos = d1 + d2;
+		cout << sumaDedigitos << endl;
+	} else {
+		cout << sumaDedigitos << endl;
+	}
+
+    return sumaDedigitos;
  }
 
 int main() {
-	/*cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
+	cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
 	cin >> cantidadDeCaracteres;
+	cantidadDeCaracteres <= 0 ? cout << "no es una cantidad valida" << endl : cout << "vamos a hacerlo" << endl;
 	
 	for (int i = 1; i <= cantidadDeCaracteres; i++) {
 	    cout << "Ingrese el caracter " << i << endl;
 	    cin >> caracterIngresado;
+
 	    int caracterConvertido = caracterIngresado;
 	    cout << caracterConvertido << endl;
-	    esPrimo(caracterConvertido);
-	    int numeroPrimo = numeroPrimoMasCercano(caracterConvertido);
-	    cout << "el primo mas cercano es: " << numeroPrimo << endl;
-	    int d1;
-	    int d2;
-	    int d3;
-	    int digitoFinalFase1;
-	    if (numeroPrimo < 100)
-	    {
-	    	d1 = numeroPrimo / 10;
-	    	d2 = numeroPrimo % 10;
-	    	cout << "primer digito: " << d1 << endl;
-	    	cout << "segundo digito: " << d2 << endl;
-	    	digitoFinalFase1 = d1 + d2;
-	    	cout << "digito final de la fase 1: " << digitoFinalFase1 << endl;
-	    } else {
-	    	d1 = numeroPrimo / 100;
-	    	d2 = (numeroPrimo % 100) / 10;
-	    	d3 = numeroPrimo % 10;
-	    	cout << "primer digito: " << d1 << endl;
-	    	cout << "segundo digito: " << d2 << endl;
-	    	cout << "tercer digito: " << d3 << endl;
-	    	digitoFinalFase1 = d1 + d2 + d3;
-	    	cout << "digito final de la fase 1: " << digitoFinalFase1 << endl;
-	    }
-	    }*/
 
-	    //fase 3:
-	    int fase2;
-	    //char caracterFinal = codificacion(fase2);
-	    char caracterFinal;
-	    cin >> caracterFinal;
-	    int caracterFinalConvertido = caracterFinal;
-	    cout << caracterFinalConvertido << endl;
-	    //int binarioFase2 = convertirABinario(fase2);
-	    int binarioCaracterFinalConvertido = convertirABinario(caracterFinalConvertido);
+	    int numeroPrimo = esPrimo(caracterConvertido);
+	    if (numeroPrimo == 0){
+	    	numeroPrimo = numeroPrimoMasCercano(caracterConvertido);
+	    	cout << "el primo mas cercano es: " << numeroPrimo << endl;
+	    } else {
+	    	numeroPrimo = caracterConvertido;
+	    	cout << "este numero ya es primo" << endl;
+	    }
+
+	    int digitoFinalFase1 = plegadoFase1(numeroPrimo);
+	    
+	   	char caracterCodificadoSilva = codificar(digitoFinalFase1);
+
+	   	int caracterConvertidoSilva = caracterCodificadoSilva;
+	   	cout << "este carecter es el numero: " << caracterConvertidoSilva << endl;
+
+	   	double raizCuadrada = sqrt(caracterConvertido);
+		cout << "La raiz cuadrada de " << caracterConvertidoSilva << " es: " << raizCuadrada  << endl;
+		
+		int decimalesAUsar = (raizCuadrada * 100000) / 10;
+		cout << decimalesAUsar << endl;
+    	
+    	int digitosAUsar = (decimalesAUsar % 10000);
+		cout << digitosAUsar << endl;
+		
+		int digitoFinalFase2 = plegadoFase2(digitosAUsar);
+		cout << "el digito final de la fase 2 es: " << digitoFinalFase2 << endl;
+	    }
+	
 	system("pause");
+	
 	return 0;
 }

@@ -4,26 +4,106 @@ using namespace std;
 
 int cantidadDeCaracteres;
 char caracterIngresado;
+
+bool esPrimo(int numero);
+int numeroPrimoMasCercano(int numero);
+int plegadoFase1(int numero);
+char codificar(int numero);
+int plegadoFase2(int numero);
+int cantidadDeBitsEncendidos(int numero);
+
+int main() {
+	cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
+	cin >> cantidadDeCaracteres;
+	cantidadDeCaracteres <= 0 ? cout << "no es una cantidad valida" << endl : cout << "vamos a hacerlo" << endl;
+	
+	for (int i = 1; i <= cantidadDeCaracteres; i++) {
+	    cout << "Ingrese el caracter " << i << endl;
+	    cin >> caracterIngresado;
+
+	    int caracterConvertido = caracterIngresado;
+	    cout << caracterConvertido << endl;
+
+	    bool numeroPrimo = esPrimo(caracterConvertido);
+	    if (numeroPrimo == false){
+	    	numeroPrimo = numeroPrimoMasCercano(caracterConvertido);
+	    	cout << "el primo mas cercano es: " << numeroPrimo << endl;
+	    } else {
+	    	numeroPrimo = caracterConvertido;
+	    	cout << "este numero ya es primo" << endl;
+	    }
+
+	    int digitoFinalFase1 = plegadoFase1(numeroPrimo);
+
+	    //fase 2
+	    
+	   	char caracterCodificadoSilva = codificar(digitoFinalFase1);
+
+	   	int caracterConvertidoSilva = caracterCodificadoSilva;
+	   	cout << "este carecter es el numero: " << caracterConvertidoSilva << endl;
+
+	   	double raizCuadrada = sqrt(caracterConvertidoSilva);
+		cout << "La raiz cuadrada de " << caracterConvertidoSilva << " es: " << raizCuadrada  << endl;
+		
+		int decimalesAUsar = (raizCuadrada * 100000) / 10;
+		cout << decimalesAUsar << endl;
+    	
+    	int digitosAUsar = (decimalesAUsar % 10000);
+		cout << digitosAUsar << endl;
+		
+		int digitoFinalFase2 = plegadoFase2(digitosAUsar);
+		cout << "el digito final de la fase 2 es: " << digitoFinalFase2 << endl;
+
+		//fase 3
+	    
+		int caracterConvertidoSilvaFase3 = codificar(digitoFinalFase2);
+
+		cout << "de la fase 3: " << caracterConvertidoSilvaFase3 << endl;
+		cout << "de la fase 2: " << caracterConvertidoSilva << endl;
+
+		int bitsEncendidosFase3 = cantidadDeBitsEncendidos(caracterConvertidoSilvaFase3);
+		int bitsEncendidosFase2 = cantidadDeBitsEncendidos(caracterConvertidoSilva);
+
+		cout << "cantidad de bits encendidos en el numero de la fase 3: " << bitsEncendidosFase3 << endl;
+		cout << "cantidad de bits encendidos en el numero de la fase 2: " << bitsEncendidosFase2 << endl;
  
- bool esPrimo(int numero){
- 	int contador = 0;
- 	for (int i = 2; i < numero; i++)
- 	{
- 		if (numero % i == 0)
- 		{
- 			contador++;
- 		} else {
- 			contador += 0;
- 		}
- 	}
- 	if (contador > 0)
- 	{
- 		cout << "no es primo" << endl;
- 		return false;
- 	} else {
- 		cout << "es primo" << endl;
- 		return true;
- 	}
+ 		int enteroFinal = bitsEncendidosFase2 + bitsEncendidosFase3;
+ 		cout << "el entero final es: " << enteroFinal << endl;
+	    }
+	
+	system("pause");
+	
+	return 0;
+}
+
+
+bool esPrimo(int numero){
+	if (numero == 0 || numero == 1)
+	{
+		return false;
+	} else if (numero == 2)
+	{
+		return true;
+	} else {
+		int contador = 0;
+	 	for (int i = 2; i < numero; i++)
+	 	{
+	 		if (numero % i == 0)
+	 		{
+	 			contador++;
+	 		} else {
+	 			contador += 0;
+	 		}
+	 	}
+	 	if (contador > 0)
+	 	{
+	 		cout << "no es primo" << endl;
+	 		return false;
+	 	} else {
+	 		cout << "es primo" << endl;
+	 		return true;
+	 	}
+	}
  }
 
  int numeroPrimoMasCercano(int numero){
@@ -186,48 +266,16 @@ char caracterIngresado;
     return sumaDedigitos;
  }
 
-int main() {
-	cout << "Ingrese la cantidad de caracteres a desencriptar:" << endl;
-	cin >> cantidadDeCaracteres;
-	cantidadDeCaracteres <= 0 ? cout << "no es una cantidad valida" << endl : cout << "vamos a hacerlo" << endl;
-	
-	for (int i = 1; i <= cantidadDeCaracteres; i++) {
-	    cout << "Ingrese el caracter " << i << endl;
-	    cin >> caracterIngresado;
+ int cantidadDeBitsEncendidos(int numero) {
+	int cociente = numero;
+	int resultado;
+	int contador = 1;
+	int bitsEncendidos = 0;
 
-	    int caracterConvertido = caracterIngresado;
-	    cout << caracterConvertido << endl;
-
-	    int numeroPrimo = esPrimo(caracterConvertido);
-	    if (numeroPrimo == 0){
-	    	numeroPrimo = numeroPrimoMasCercano(caracterConvertido);
-	    	cout << "el primo mas cercano es: " << numeroPrimo << endl;
-	    } else {
-	    	numeroPrimo = caracterConvertido;
-	    	cout << "este numero ya es primo" << endl;
-	    }
-
-	    int digitoFinalFase1 = plegadoFase1(numeroPrimo);
-	    
-	   	char caracterCodificadoSilva = codificar(digitoFinalFase1);
-
-	   	int caracterConvertidoSilva = caracterCodificadoSilva;
-	   	cout << "este carecter es el numero: " << caracterConvertidoSilva << endl;
-
-	   	double raizCuadrada = sqrt(caracterConvertido);
-		cout << "La raiz cuadrada de " << caracterConvertidoSilva << " es: " << raizCuadrada  << endl;
-		
-		int decimalesAUsar = (raizCuadrada * 100000) / 10;
-		cout << decimalesAUsar << endl;
-    	
-    	int digitosAUsar = (decimalesAUsar % 10000);
-		cout << digitosAUsar << endl;
-		
-		int digitoFinalFase2 = plegadoFase2(digitosAUsar);
-		cout << "el digito final de la fase 2 es: " << digitoFinalFase2 << endl;
-	    }
-	
-	system("pause");
-	
-	return 0;
-}
+		while(cociente > 0) {
+		resultado = cociente % 2;
+		bitsEncendidos += resultado;
+		cociente /= 2;
+		}
+	return bitsEncendidos;
+ }
